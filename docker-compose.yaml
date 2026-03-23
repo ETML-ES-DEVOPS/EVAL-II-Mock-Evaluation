@@ -33,7 +33,7 @@ services:
   # -----------------------------
   ms-payroll-employees-get:
     &employees-service
-    build: ms-get
+    build: payroll/ms-get
     container_name: ms-payroll-employees-get
     depends_on:
       ms-payroll-database:
@@ -54,17 +54,17 @@ services:
 
   ms-payroll-employees-post:
     <<: *employees-service
-    build: ms-post
+    build: payroll/ms-post
     container_name: ms-payroll-employees-post
 
   ms-payroll-employees-put:
     <<: *employees-service
-    build: ms-put
+    build: payroll/ms-put
     container_name: ms-payroll-employees-put
 
   ms-payroll-employees-delete:
     <<: *employees-service
-    build: ms-delete
+    build: payroll/ms-delete
     container_name: ms-payroll-employees-delete
 
   # -----------------------------
