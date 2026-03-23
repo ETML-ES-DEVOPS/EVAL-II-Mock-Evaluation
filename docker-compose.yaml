@@ -73,6 +73,22 @@ services:
     container_name: ms-payroll-employees-patch
 
   # -----------------------------
+  # Customers microservice
+  # -----------------------------
+  ms-customers:
+    build:
+      context: customers/ms-customers
+    container_name: ms-customers
+    networks:
+      - customers
+    healthcheck:
+      test: ["CMD", "wget", "--quiet", "--tries=1", "--spider", "http://localhost:3000/health"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+      start_period: 10s
+
+  # -----------------------------
   # Nginx API Gateway
   # -----------------------------
   ms-api-gateway:
@@ -91,9 +107,12 @@ services:
         condition: service_healthy
       ms-payroll-employees-patch:
         condition: service_healthy
+      ms-customers:
+        condition: service_healthy
     networks:
       - dmz
       - payroll
+      - customers
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost/health"]
       interval: 10s
@@ -101,11 +120,14 @@ services:
       retries: 5
 
 networks:
+  dmz:
+    driver: bridge
   payroll:
     driver: bridge
     internal : true
-  dmz:
+  customers:
     driver: bridge
+    internal: true
 
 volumes:
   mysql-payroll-data:
