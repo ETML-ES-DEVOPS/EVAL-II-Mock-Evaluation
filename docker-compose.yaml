@@ -67,6 +67,11 @@ services:
     build: payroll/ms-delete
     container_name: ms-payroll-employees-delete
 
+  ms-payroll-employees-patch:
+    <<: *employees-service
+    build: payroll/ms-patch
+    container_name: ms-payroll-employees-patch
+
   # -----------------------------
   # Nginx API Gateway
   # -----------------------------
