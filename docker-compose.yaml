@@ -89,6 +89,8 @@ services:
         condition: service_healthy
       ms-payroll-employees-delete:
         condition: service_healthy
+      ms-payroll-employees-patch:
+        condition: service_healthy
     networks:
       - dmz
       - payroll
