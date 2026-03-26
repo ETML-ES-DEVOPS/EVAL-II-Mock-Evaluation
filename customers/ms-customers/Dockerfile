@@ -38,7 +38,7 @@ COPY . .
 VOLUME ["/data"]
 
 # Expose your Express port
-EXPOSE 3002
+EXPOSE 3000
 
 # Start the application
 CMD ["npm", "start"]
